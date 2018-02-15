@@ -1,0 +1,31 @@
+<ion-header>
+</ion-header>
+ 
+<ion-content padding>
+	<div style="text-align: center;padding-bottom:40px;padding-top:40px">
+	 	<ion-img width="120px" height="120px" src="../../assets/imgs/icono.png" style="background-color: #FFFFFF;align:center">	
+		</ion-img>
+	</div>
+ <ion-list>
+ 
+ <ion-item>
+ <ion-label floating>Username</ion-label>
+ <ion-input type="text"></ion-input>
+ </ion-item>
+ 
+ <ion-item>
+ <ion-label floating>Password</ion-label>
+ <ion-input type="password"></ion-input>
+ </ion-item>
+ 
+ <ion-item>
+   <ion-label floating>Re-Password</ion-label>
+   <ion-input type="password"></ion-input>
+ </ion-item>
+ 
+ </ion-list>
+ 
+ <div padding>
+   <button ion-button block (click)="signup()" color="danger" round>Sign In</button>
+ </div>
+</ion-content>

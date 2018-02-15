@@ -1,0 +1,35 @@
+<ion-header>
+</ion-header>
+ 
+<ion-content padding style="background-color:#FFFFFF;">
+	<!--<form (ngSubmit)="logForm()">
+		<ion-item>
+	     <ion-label floating>Username</ion-label>
+	     <ion-input type="text"></ion-input>
+	   </ion-item>
+	   <ion-item>
+		<ion-label floating>Password</ion-label>
+	     <ion-input type="password"></ion-input>
+	   </ion-item>
+	   <button ion-button type="submit" block color="danger" round>Log in</button>
+	</form>-->
+	
+ <form (ngSubmit)="loguin()">
+ 	<div style="text-align: center;padding-bottom:60px;padding-top:40px">
+	 	<ion-img width="150px" height="150px" src="assets/imgs/icono.png" style="background-color: #FFFFFF;align:center">	
+		</ion-img>
+	</div>
+   <ion-item>
+     <ion-label floating>Username</ion-label>
+     <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+   </ion-item>
+ <ion-item>
+   <ion-label floating>Password</ion-label>
+     <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+   </ion-item>
+   <button ion-button block color="danger" type="submit" round>Log in</button>
+ 	<ion-input type="text" name="respuesta" [(ngModel)]="respuesta" style="color:red"></ion-input>
+ </form>
+ <!--<ion-input type="text" [(ngModel)]="data.nombre" name="dato"></ion-input>
+ <ion-input type="text" [(ngModel)]="data.contrasenia" name="dato"></ion-input>-->
+</ion-content>
