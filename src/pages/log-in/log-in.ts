@@ -27,28 +27,32 @@ export class LogInPage {
   }
 
   loguin(){
-    this.database.buscarUsu(this.username).then((data) => {
-      for(let i in data){
-        this.id = data[i].id;
-        this.mensaje = data[i].mensaje;  
-      }
-      if(this.id > 0){
-        this.database.logearse(this.id,this.password).then((data) => {
-          for(let i in data){
-            if(data[i].mensaje == "ok"){
-              this.navCtrl.setRoot(CalendarPage);
-            }else{
-              this.password = "";
-              this.respuesta = this.mensaje;
+    if(this.username != "" && this.password != ""){
+      this.database.buscarUsu(this.username).then((data) => {
+        for(let i in data){
+          this.id = data[i].id;
+          this.mensaje = data[i].mensaje;  
+        }
+        if(this.id > 0){
+          this.database.logearse(this.id,this.password).then((data) => {
+            for(let i in data){
+              if(data[i].mensaje == "ok"){
+                this.navCtrl.setRoot(CalendarPage);
+              }else{
+                this.password = "";
+                this.respuesta = this.mensaje;
+              }
             }
-          }
-        }) 
-      }else{
-        this.username = "";
-        this.password = "";
-        this.respuesta = this.mensaje;
-      }
-    })
+          }) 
+        }else{
+          this.username = "";
+          this.password = "";
+          this.respuesta = this.mensaje;
+        }
+      })
+    }else{
+      this.respuesta = "Debes rellenar todos los campos";
+    }
   }
 
   /*getUsers(){

@@ -151,28 +151,27 @@ export class DatabaseProvider {
     })
   }
 
-
-
-  getAnimes(){
-     /*return new Promise ((resolve, reject) => {
-      this.db.executeSql("SELECT a.titulo,a.imagen,a.id as idAnime,t.nombre,a.id_temporada,t.id FROM anime a INNER JOIN temporada t ON a.id_temporada=t.id GROUP BY a.titulo,a.imagen,a.id,t.nombre,a.id_temporada,t.id", []).then((data) => {
-        let animes = [];
-        console.log(data);
-        if (data.rows.length > 0) {
-          for (var i = 0; i < data.rows.length; i++) {
-            animes.push({
-              titulo: data.rows.item(i).titulo,
-              imagen: data.rows.item(i).imagen,
-              id: data.rows.item(i).idAnime,
-              nombre: data.rows.item(i).nombre
-            });           
-          }          
+  registrar(nombre:string,contrasenia:string){
+    return new Promise((resolve,reject) => {
+      this.db.executeSql("INSERT INTO usuario(nombre,contrasenia) VALUES(?,?)",[nombre,contrasenia]).then((data) => {
+        let mensaje = [];
+        if(data.rows.length = 0){
+          mensaje.push({
+            mensaje: "Ha ocurrido un error"
+          })
+        }else{
+          mensaje.push({
+            mensaje: "ok"
+          })
         }
-        resolve(animes);
+        resolve(mensaje);
       }, (error) => {
         reject(error);
       })
-    })*/
+    })
+  }
+
+  getAnimes(){
     return new Promise ((resolve, reject) => {
       this.db.executeSql("SELECT id,nombre FROM temporada", []).then((data) => {
         let temporadas = [];
