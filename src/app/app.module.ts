@@ -16,7 +16,7 @@ import { NewsPage } from '../pages/news/news';
 import { NewsProfilePage} from '../pages/news-profile/news-profile';
 import { SettingsPage } from '../pages/settings/settings';
 
-
+import { idService } from '../providers/idService/idService';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatabaseProvider } from '../providers/database/database';
@@ -65,7 +65,8 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DatabaseProvider
+    DatabaseProvider,
+    idService
   ]
 })
 export class AppModule {}

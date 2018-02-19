@@ -6,16 +6,36 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="danger">
   	<button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>profile</ion-title>
+    <ion-title>{{nombre}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+	<div style="text-align: center;margin-bottom:50%">
+	 	<ion-img src="assets/imgs/default.png" style="background-color: #FFFFFF;text-align:center;width: 80%;height:80%;padding:10%">
+		</ion-img>
+	</div>
+	<form (ngSubmit)="update()">
+		<button ion-item (click)="showUser()" style="background-color:#B0A6A4">Cambia nombre de usuario
+		<ion-icon name="ios-arrow-forward" item-right></ion-icon></button>
+		<ion-item *ngIf="user">
+			<ion-label floating>Escribe nuevo nombre</ion-label>
+			<ion-input type="text" [(ngModel)]="newUsername" name="newUsername"></ion-input>
+		</ion-item>
+		<button ion-item (click)="showPass()" style="background-color:#B0A6A4">Cambia contraseña
+		<ion-icon name="ios-arrow-forward" item-right></ion-icon></button>
+		<ion-item *ngIf="pass">
+			<ion-label floating>Escribe nueva contraseña</ion-label>
+			<ion-input type="text" [(ngModel)]="newPass" name="newPass"></ion-input>
+		</ion-item>
+		<div style="text-align:center">
+			<button ion-button type="submit" round color="danger" full>Update</button>
+		</div>
+	</form>
 </ion-content>

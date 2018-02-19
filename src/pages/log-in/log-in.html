@@ -27,9 +27,13 @@
    <ion-label floating>Password</ion-label>
      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
    </ion-item>
-   <button ion-button block color="danger" type="submit" round>Log in</button>
+   <button ion-button block color="danger" type="submit" round style="margin-top:10%">Log in</button>
  	<ion-input type="text" name="respuesta" [(ngModel)]="respuesta" style="color:red"></ion-input>
  </form>
+ <div style="text-align:center;margin-top:-10%">
+ 	<p>¿No tienes cuenta?</p>
+ 	<a (click)="registro()">!Registrate gratis!</a>
+ </div>
  <!--<ion-input type="text" [(ngModel)]="data.nombre" name="dato"></ion-input>
  <ion-input type="text" [(ngModel)]="data.contrasenia" name="dato"></ion-input>-->
 </ion-content>

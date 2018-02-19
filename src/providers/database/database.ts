@@ -95,7 +95,7 @@ export class DatabaseProvider {
         this.db.executeSql(anime4,[]);
         this.db.executeSql(anime5,[]);
         this.db.executeSql(anime6,[]);*/
-
+        
         this.isOpen = true;
       }).catch((error) => {
         console.log(error);
@@ -104,8 +104,6 @@ export class DatabaseProvider {
   }
 
   buscarUsu(nombre:string){
-    let insert = "INSERT INTO usuario(nombre,contrasenia) VALUES('pablo',1234)";
-    this.db.executeSql(insert,[]);
     return new Promise((resolve, reject) => {
       this.db.executeSql("SELECT * FROM usuario WHERE nombre=?",[nombre]).then((data) => {
         let idMensaje = [];
@@ -151,28 +149,100 @@ export class DatabaseProvider {
     })
   }
 
-
-
-  getAnimes(){
-     /*return new Promise ((resolve, reject) => {
-      this.db.executeSql("SELECT a.titulo,a.imagen,a.id as idAnime,t.nombre,a.id_temporada,t.id FROM anime a INNER JOIN temporada t ON a.id_temporada=t.id GROUP BY a.titulo,a.imagen,a.id,t.nombre,a.id_temporada,t.id", []).then((data) => {
-        let animes = [];
-        console.log(data);
-        if (data.rows.length > 0) {
-          for (var i = 0; i < data.rows.length; i++) {
-            animes.push({
-              titulo: data.rows.item(i).titulo,
-              imagen: data.rows.item(i).imagen,
-              id: data.rows.item(i).idAnime,
-              nombre: data.rows.item(i).nombre
-            });           
-          }          
+  registrar(nombre:string,contrasenia:string){
+    return new Promise((resolve,reject) => {
+      this.db.executeSql("INSERT INTO usuario(nombre,contrasenia) VALUES(?,?)",[nombre,contrasenia]).then((data) => {
+        let mensaje = [];
+        if(data.rows.length = 0){
+          mensaje.push({
+            mensaje: "Ha ocurrido un error"
+          })
+        }else{
+          mensaje.push({
+            mensaje: "ok"
+          })
         }
-        resolve(animes);
+        resolve(mensaje);
       }, (error) => {
         reject(error);
       })
-    })*/
+    })
+  }
+
+  getUsuario(id:number){
+    return new Promise((resolve,reject) => {
+      this.db.executeSql("SELECT * FROM usuario WHERE id=?",[id]).then((data) => {
+        let usuario = [];
+         if(data.rows.length > 0){
+           for(var i=0;i<data.rows.length;i++){
+             usuario.push({
+               nombre: data.rows.item(i).nombre
+             })
+           }
+         }
+         resolve(usuario);
+      }, (error) => {
+        reject(error);
+      })
+    })
+  }
+
+  updateUsername(id:number,user:string){
+    return new Promise((resolve,reject) => {
+      this.db.executeSql("UPDATE usuario  SET nombre=? WHERE id=?",[user,id]).then((data) => {
+        resolve(data);
+      }, (error) => {
+        reject(error);
+      })
+    })
+  }
+
+  updatePassword(id:number,pass:string){
+    return new Promise((resolve,reject) => {
+      console.log("entro a la promesa n2");
+      this.db.executeSql("UPDATE usuario  SET contrasenia=? WHERE id=?",[pass,id]).then((data) => {
+        let change = [];
+        if(data.rows.length > 0){
+          for(var i=0;i<data.rows.length;i++){
+            change.push({
+              mensaje: 'ok'
+            })
+          }
+        }else{
+          change.push({
+            mensaje: 'no'
+          })
+        }
+       resolve(change);
+      }, (error) => {
+        reject(error);
+      })
+    })
+  }
+
+  getAnime(id:number){
+    return new Promise((resolve,reject) => {
+      this.db.executeSql("SELECT * FROM anime WHERE id=?",[id]).then((data) => {
+        let anime = [];
+        if(data.rows.length > 0){
+          for(var i=0;i<data.rows.length;i++){
+            anime.push({
+              titulo: data.rows.item(i).titulo,
+              imagen: data.rows.item(i).imagen,
+              descripcion: data.rows.item(i).descripcion,
+              episodios: data.rows.item(i).episodios,
+              fecha: data.rows.item(i).fecha
+            })
+          }
+        }
+        resolve(anime);
+      }, (error) => {
+        reject(error);
+      })
+    })
+  }
+
+  getAnimes(){
     return new Promise ((resolve, reject) => {
       this.db.executeSql("SELECT id,nombre FROM temporada", []).then((data) => {
         let temporadas = [];

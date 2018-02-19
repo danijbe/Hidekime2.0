@@ -1,31 +1,32 @@
 <ion-header>
 </ion-header>
  
-<ion-content padding>
-	<div style="text-align: center;padding-bottom:40px;padding-top:40px">
-	 	<ion-img width="120px" height="120px" src="../../assets/imgs/icono.png" style="background-color: #FFFFFF;align:center">	
-		</ion-img>
-	</div>
- <ion-list>
- 
- <ion-item>
- <ion-label floating>Username</ion-label>
- <ion-input type="text"></ion-input>
- </ion-item>
- 
- <ion-item>
- <ion-label floating>Password</ion-label>
- <ion-input type="password"></ion-input>
- </ion-item>
- 
- <ion-item>
-   <ion-label floating>Re-Password</ion-label>
-   <ion-input type="password"></ion-input>
- </ion-item>
- 
- </ion-list>
- 
- <div padding>
-   <button ion-button block (click)="signup()" color="danger" round>Sign In</button>
+<ion-content padding style="background-color:#FFFFFF;">
+ 	<form (ngSubmit)="register()">
+ 		<div style="text-align: center;padding-bottom:40px;padding-top:40px">
+	 		<ion-img width="120px" height="120px" src="assets/imgs/icono.png" style="background-color: #FFFFFF;text-align:center">
+			</ion-img>
+		</div>
+		 <ion-item>
+			 <ion-label floating>Username</ion-label>
+			 <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+		 </ion-item>
+		 
+		 <ion-item>
+			 <ion-label floating>Password</ion-label>
+			 <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+		 </ion-item>
+		 
+		 <ion-item>
+		   <ion-label floating>Re-Password</ion-label>
+		   <ion-input type="password" [(ngModel)]="repass" name="repass"></ion-input>
+		 </ion-item>
+
+	   <button ion-button block style="margin-top:10%" type="submit" color="danger" round>Sign In</button>
+	   <ion-input type="text" name="respuesta" [disabled]="true" [(ngModel)]="respuesta" style="color:red"></ion-input>
+	</form>
+	<div style="text-align:center;margin-top:-10%">
+ 	<p>¿Tienes cuenta?</p>
+ 	<a (click)="logear()">¡Inicia sesion!</a>
  </div>
 </ion-content>

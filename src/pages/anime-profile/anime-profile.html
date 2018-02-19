@@ -6,13 +6,19 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>anime-profile</ion-title>
+  <ion-navbar color="danger">
+    <ion-title>{{titulo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <div *ngIf="espera">
+      <img [src]="imagen">
+      <p><b>{{titulo}}</b></p>
+      <p>{{episodios}} episodios</p>
+      <p>{{fecha}}</p>
+      <p>{{descripcion}}</p>
+    </div>
 </ion-content>

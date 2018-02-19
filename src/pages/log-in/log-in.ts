@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database';
-import { CalendarPage } from '../calendar/calendar';
-
+import { SeasonsPage } from '../seasons/seasons';
+import { RegisterPage } from '../register/register';
 import { MenuController } from 'ionic-angular';
+import { idService } from '../../providers/idService/idService';
 /**
  * Generated class for the LogInPage page.
  *
@@ -22,33 +23,42 @@ export class LogInPage {
   id: number;
   mensaje: string;
   respuesta: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private database: DatabaseProvider, public menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public idService: idService,private database: DatabaseProvider, public menu: MenuController) {
     this.menu.swipeEnable(false);
   }
 
   loguin(){
-    this.database.buscarUsu(this.username).then((data) => {
-      for(let i in data){
-        this.id = data[i].id;
-        this.mensaje = data[i].mensaje;  
-      }
-      if(this.id > 0){
-        this.database.logearse(this.id,this.password).then((data) => {
-          for(let i in data){
-            if(data[i].mensaje == "ok"){
-              this.navCtrl.setRoot(CalendarPage);
-            }else{
-              this.password = "";
-              this.respuesta = this.mensaje;
+    if(this.username != null && this.password != null){
+      this.database.buscarUsu(this.username).then((data) => {
+        for(let i in data){
+          this.id = data[i].id;
+          this.mensaje = data[i].mensaje;  
+        }
+        if(this.id > 0){
+          this.database.logearse(this.id,this.password).then((data) => {
+            for(let i in data){
+              if(data[i].mensaje == "ok"){
+                this.idService.usuID = this.id;
+                this.navCtrl.setRoot(SeasonsPage);
+              }else{
+                this.password = "";
+                this.respuesta = this.mensaje;
+              }
             }
-          }
-        }) 
-      }else{
-        this.username = "";
-        this.password = "";
-        this.respuesta = this.mensaje;
-      }
-    })
+          }) 
+        }else{
+          this.username = "";
+          this.password = "";
+          this.respuesta = this.mensaje;
+        }
+      })
+    }else{
+      this.respuesta = "Debes rellenar todos los campos";
+    }
+  }
+
+  registro(){
+    this.navCtrl.setRoot(RegisterPage);
   }
 
   /*getUsers(){
